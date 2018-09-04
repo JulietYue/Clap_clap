@@ -1,0 +1,67 @@
+<DOCTYPE html>
+
+<html>
+    <meta charset="utf-8" />
+    <title>Clap Clap</title>
+    <link rel="stylesheet" href="style.css" />
+    
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>       
+    <script src="weather.js"></script>
+
+    <script>
+
+        function myFunction() {
+            var x = document.getElementById("mood");
+            var toSend = "mood=" + x;
+            var request = new XMLHttpRequest();
+            request.open("POST", "http://clapclap-database.herokuapp.com/moods", true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.onreadystatechange= function(){
+                if(request.readyState == 4 && request.status == 200){
+                    moodJSON = request.responseText;
+                    moodData = JSON.parse(moodJSON);
+                }
+            }
+            xhttp.send(toSend);
+        }
+    </script>
+
+</head>
+
+<body>
+    <p id= CLAP><img src="icon.png" alt="icon">  CLAP CLAP  <img src="icon.png" alt="icon"></p>
+    
+	<table>
+	    <tr class="titles">
+	        <td id="t11"><p>Current Weather</p></td>
+	        <td id="t12"><p>Current Playlist</p></td>
+	        <td id="t13"><p>How're you feeling?</p></td>
+	    </tr>
+
+        <tr>
+            <td id="t21"> 
+                <div class="container" hidden>
+                    <div class="jumbotron"></div>
+                    <div id="forecast" class="row"></div>
+                </div>           
+                
+            </td>
+            <td id="t22">
+            <br> <br>
+            </td>
+
+            <td id="t23">
+                <p id="button" onclick="getMood('sunny')">exultant</p><br>
+                <p id="button" onclick="getMood('cloudy')">melancholy</p><br>
+                <p id="button" onclick="getMood('rain')">cry</p><br>
+                <p id="button" onclick="getMood('snowy')">festive</p><br>
+                <p id="button" onclick="getMood('extreme')">wild</p><br>
+            </td>
+        </tr>
+
+	</table>
+
+</body>
+
+</html>
